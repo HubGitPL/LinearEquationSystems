@@ -2,9 +2,9 @@ from Macierz import Macierz
 from Solutions import Solutions
 import time
 #193410
-a1 = 9
+a1 = 6
 a2 = a3 = -1
-N = 910
+N = 930
 f = 3
 A = Macierz.createMatrixA(N, a1, a2, a3)
 b = Macierz.createColumnVector(N, f+1)
