@@ -2,12 +2,12 @@ from Matrix import Matrix
 from Solutions import Solutions
 import time
 import matplotlib.pyplot as plt
-#193410
-a1 = 5+4
+
+a1 = 3
 a2 = a3 = -1
 N = 910
 f = 3
-maxIterations=100
+maxIterations=200
 A = Matrix.createMatrixA(N, a1, a2, a3)
 b = Matrix.createColumnVector(N, f+1)
 
@@ -17,7 +17,7 @@ x, iterations, errors = Solutions.jacobiMethod(N, A, b, maxIterations)
 end = time.time()
 print("Jacobi Method:")
 print("Time:", end - start)
-print(x)
+#print(x)
 print(iterations)
 print(errors[iterations-1])
 
@@ -27,21 +27,17 @@ x2, iterations2, errors2 = Solutions.gaussSeidelMethod(N, A, b, maxIterations)
 end = time.time()
 print("\nGauss-Seidel Method:")
 print("Time:", end - start)
-print(x2)
+#print(x2)
 print(iterations2)
 print(errors2[iterations2-1])
 
-#Dla obu metod przedstaw na wykresie jak zmienia się norma residuum
-# w kolejnych iteracjach wykony- wanych w celu wyznaczenia rozwiązania
+# Czy metody iteracyjne dla takich wartości elementów macierzy A zbiegają się?
+# Dla obu metod przedstaw na wykresie jak zmienia się norma residuum w kolejnych iteracjach
 # (oś y w skali logarytmicznej).
 plt.plot(range(1, iterations+1), errors, label="Jacobi")
 plt.plot(range(1, iterations2+1), errors2, label="Gauss-Seidel")
 plt.yscale('log')
 plt.xlabel("Iterations")
 plt.ylabel("Error")
-#loc po prawej na zewnatrz
 plt.legend(loc="upper right")
 plt.show()
-
-#
-

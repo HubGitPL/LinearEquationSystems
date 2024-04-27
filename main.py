@@ -1,13 +1,12 @@
 #Mateusz Fydrych
 #Uklady rownan liniowych
-
 import math
-from Macierz import Macierz
-#testy
+from Matrix import Matrix
 
-A = Macierz.createMatrixA(4, 1, 2, 3)
-B = Macierz.createMatrixA(4, 1, 2, 3)
+#tests
+A = Matrix.createMatrixA(4, 1, 2, 3)
+B = Matrix.createMatrixA(4, 1, 2, 3)
 print(A)
 print(A == B)
-b = Macierz.createColumnVector(4, 6)
+b = Matrix.createColumnVector(4, 6)
 print(b)

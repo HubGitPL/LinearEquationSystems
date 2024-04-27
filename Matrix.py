@@ -1,6 +1,7 @@
 from numpy import sin
 from math import sqrt
-class Macierz:
+
+class Matrix:
     def __init__(self, n, m):
         self.n = n
         self.m = m
@@ -20,21 +21,21 @@ class Macierz:
         return s
 
     def __add__(self, other):
-        wynik = Macierz(self.n, self.m)
+        wynik = Matrix(self.n, self.m)
         for i in range(self.n):
             for j in range(self.m):
                 wynik.tab[i][j] = self.tab[i][j] + other.tab[i][j]
         return wynik
 
     def __sub__(self, other):
-        wynik = Macierz(self.n, self.m)
+        wynik = Matrix(self.n, self.m)
         for i in range(self.n):
             for j in range(self.m):
                 wynik.tab[i][j] = self.tab[i][j] - other.tab[i][j]
         return wynik
 
     def __mul__(self, other):
-        wynik = Macierz(self.n, other.m)
+        wynik = Matrix(self.n, other.m)
         #O(n^3) do poprawy
         for i in range(self.n):
             for j in range(other.m):
@@ -60,7 +61,7 @@ class Macierz:
 
     @staticmethod
     def createMatrixA(N, a1, a2, a3):
-        A = Macierz(N, N)
+        A = Matrix(N, N)
         for i in range(N):
             for j in range(N):
                 if i == j:
@@ -73,11 +74,12 @@ class Macierz:
 
     @staticmethod
     def createColumnVector(N, fPlusOne):
-        b = Macierz(N, 1)
+        b = Matrix(N, 1)
         #od 1 do N
         for i in range(N):
             b.tab[i][0] = sin(i * fPlusOne)
         return b
+
     #test
     @staticmethod
     def drukujPierwszyElement(self):
@@ -90,9 +92,58 @@ class Macierz:
         return sqrt(sum)
 
     def __copy__(self):
-        A = Macierz(self.n, self.m)
+        A = Matrix(self.n, self.m)
         for i in range(self.n):
             for j in range(self.m):
                 A.tab[i][j] = self.tab[i][j]
         return A
+
+    #get L for LU factorization
+    @staticmethod
+    def getL(N, A):
+        L = Matrix(N, N)
+        for i in range(N):
+            for j in range(N):
+                if i > j:
+                    L.tab[i][j] = A.tab[i][j]
+                elif i == j:
+                    L.tab[i][j] = 1
+        return L
+
+    #get U for LU factorization
+    @staticmethod
+    def getU(N, A):
+        U = Matrix(N, N)
+        for i in range(N):
+            for j in range(N):
+                if i <= j:
+                    U.tab[i][j] = A.tab[i][j]
+        return U
+
+    @staticmethod
+    def luHandler(L, U, n):
+        for i in range(1, n):
+            for j in range(i):
+                L.tab[i][j] = U.tab[i][j] / U.tab[j][j]
+                for k in range(j, n):
+                    U.tab[i][k] -= L.tab[i][j] * U.tab[j][k]
+        return L, U
+
+    @staticmethod
+    def LYEqualsB(L, y, b):
+        for i in range(L.n):
+            sum = 0
+            for j in range(i):
+                sum += L.tab[i][j] * y.tab[j][0]
+            y.tab[i][0] = b.tab[i][0] - sum
+        return y
+
+    @staticmethod
+    def UXEqualsY(U, x, y):
+        for i in range(U.n-1, -1, -1):
+            sum = 0
+            for j in range(i+1, U.n):
+                sum += U.tab[i][j] * x.tab[j][0]
+            x.tab[i][0] = (y.tab[i][0] - sum) / U.tab[i][i]
+        return x
 
