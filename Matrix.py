@@ -75,12 +75,10 @@ class Matrix:
     @staticmethod
     def createColumnVector(N, fPlusOne):
         b = Matrix(N, 1)
-        #od 1 do N
         for i in range(N):
             b.tab[i][0] = sin(i * fPlusOne)
         return b
 
-    #test
     @staticmethod
     def drukujPierwszyElement(self):
         print(self.tab[0][0])

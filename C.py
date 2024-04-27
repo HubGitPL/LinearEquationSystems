@@ -32,8 +32,7 @@ print(iterations2)
 print(errors2[iterations2-1])
 
 # Czy metody iteracyjne dla takich wartości elementów macierzy A zbiegają się?
-# Dla obu metod przedstaw na wykresie jak zmienia się norma residuum w kolejnych iteracjach
-# (oś y w skali logarytmicznej).
+# Dla obu metod przedstaw na wykresie jak zmienia się norma residuum w kolejnych iteracjach.
 plt.plot(range(1, iterations+1), errors, label="Jacobi")
 plt.plot(range(1, iterations2+1), errors2, label="Gauss-Seidel")
 plt.yscale('log')

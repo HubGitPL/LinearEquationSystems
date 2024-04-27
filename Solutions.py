@@ -21,6 +21,7 @@ class Solutions:
             res_vect.append(res.norm())
             res = res_vect[-1]
             x = xNext
+
         return xNext, iterations, res_vect
 
 
@@ -65,6 +66,7 @@ class Solutions:
         #here we solve Ux=y using backward substitution
         x = Matrix.UXEqualsY(U, x, y)
         res = A * x - b
+
         return x, res.norm()
 
 

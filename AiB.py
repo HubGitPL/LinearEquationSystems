@@ -32,16 +32,13 @@ print(iterations2)
 print(errors2[iterations2-1])
 
 #Dla obu metod przedstaw na wykresie jak zmienia się norma residuum
-# w kolejnych iteracjach wykony- wanych w celu wyznaczenia rozwiązania
-# (oś y w skali logarytmicznej).
+# w kolejnych iteracjach wykonywanych w celu wyznaczenia rozwiązania
 plt.plot(range(1, iterations+1), errors, label="Jacobi")
 plt.plot(range(1, iterations2+1), errors2, label="Gauss-Seidel")
 plt.yscale('log')
 plt.xlabel("Iterations")
 plt.ylabel("Error")
-#loc po prawej na zewnatrz
 plt.legend(loc="upper right")
 plt.show()
 
-#
 
